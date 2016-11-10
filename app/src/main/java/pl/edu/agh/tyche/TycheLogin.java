@@ -30,6 +30,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.content.Intent;
 
+import com.auth0.android.Auth0;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,14 +65,31 @@ public class TycheLogin extends AppCompatActivity implements LoaderCallbacks<Cur
     private View mProgressView;
     private View mLoginFormView;
 
+//    private void login(String email, String password) {
+//        Auth0 auth0 = new Auth0(YOUR_CLIENT_ID, YOUR_AUTH0_DOMAIN);
+//        AuthenticationAPIClient client = new AuthenticationAPIClient(auth0);
+//
+//        // proper login
+//    }
+
     /** Called when the user clicks the Send button */
     public void sendMessage(View view) {
         // Do something in response to button
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
+
+//        // Your own Activity code
+//        Auth0 auth0 = new Auth0("YOUR_AUTH0_CLIENT_ID", "YOUR_AUTH0_DOMAIN");
+//        lock = Lock.newBuilder(auth0, callback)
+//                //Customize Lock
+//                .build(this);
+
+
+
         setContentView(R.layout.activity_tyche_login);
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
@@ -99,6 +118,14 @@ public class TycheLogin extends AppCompatActivity implements LoaderCallbacks<Cur
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
     }
+
+//    @Override
+//    protected void onDestroy() {
+//        super.onDestroy();
+//        // Your own Activity code
+//        lock.onDestroy(this);
+//        lock = null;
+//    }
 
     private void populateAutoComplete() {
         if (!mayRequestContacts()) {
@@ -166,6 +193,22 @@ public class TycheLogin extends AppCompatActivity implements LoaderCallbacks<Cur
         boolean cancel = false;
         View focusView = null;
 
+//        //-------------Auth0-----------------------
+//        client.login(email, password, "YOUR_DATABASE_CONNECTION_NAME")
+//                .start(new BaseCallback<Credentials, AuthenticationException>() {
+//                    @Override
+//                    public void onSuccess(Credentials payload) {
+//                        // Store credentials
+//                        // Navigate to your main activity
+//                    }
+//
+//                    @Override
+//                    public void onFailure(AuthenticationException error) {
+//                        // Show error to user
+//                    }
+//                });
+//        //-------------Auth0-----------------------
+
         // Check for a valid password, if the user entered one.
         if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
             mPasswordView.setError(getString(R.string.error_invalid_password));
@@ -197,6 +240,9 @@ public class TycheLogin extends AppCompatActivity implements LoaderCallbacks<Cur
 
             Intent myIntent = new Intent(view.getContext(), MainActivity.class);
             startActivityForResult(myIntent, 0);
+
+            // TODO
+//            startActivity(lock.newIntent(this));
         }
     }
 
